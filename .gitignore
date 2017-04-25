@@ -1,0 +1,12 @@
+;;files to ignore
+Tower Defense.sln
+
+;;extensions to ignore
+*.log
+*.pot
+*.pyc
+
+;;directories to ignore
+ProjectSettings/
+Temp/
+Library/
