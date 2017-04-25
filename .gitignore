@@ -2,9 +2,12 @@
 Tower Defense.sln
 
 ;;extensions to ignore
-*.log
-*.pot
-*.pyc
+*.csproj
+*.unityproj
+*.sln
+*.user
+*.userprefs
+*.DS_store
 
 ;;directories to ignore
 ProjectSettings/
