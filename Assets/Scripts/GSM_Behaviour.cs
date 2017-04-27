@@ -19,6 +19,7 @@ public class GSM_Behaviour : MonoBehaviour {
         set
         {
             gold = value;
+            goldLabel.text = "Gold: " + gold;
         }
     }
     //In Game Trait
@@ -33,6 +34,7 @@ public class GSM_Behaviour : MonoBehaviour {
         set
         {
             essence = value;
+            essenceLabel.text = "Essence: " + essence;
         }
     }
     //In Game Lives
@@ -47,6 +49,8 @@ public class GSM_Behaviour : MonoBehaviour {
         set
         {
             lives = value;
+            lifeLabel.text = "Lives: " + lives;
+
         }
     }
     //In Game Wave
@@ -61,25 +65,59 @@ public class GSM_Behaviour : MonoBehaviour {
         set
         {
             wave = value;
+            waveLabel.text = "Wave: " + wave;
         }
     }
     //Trait System
     [System.Serializable]
     public class Trait
     {
+        public int id;
         public string name;
         public string description;
         public int cost;
         public int level;
+        public int max_level;
+        public bool enabled;
+        public void upgrade()
+        {
+            if(this.level < max_level)
+            { 
+                this.level = this.level + 1;
+            }
+        }
+        public void learn()
+        {
+            if(this.enabled == false)
+            {
+                this.enabled = true;
+            }
+        }
     }
     [System.Serializable]
     public class TraitTree
     {
-        public string name;
-        public string description;
         public Trait[] traits;
+        public bool has_max_level = false;
+        public void levelup(Trait trait)
+        {
+            if(has_max_level == false)
+            { 
+                foreach (Trait looped_trait in traits)
+                {
+                    if (looped_trait.level < looped_trait.max_level && trait.id == looped_trait.max_level)
+                    {
+                        looped_trait.upgrade();
+                        if(looped_trait.level == looped_trait.max_level)
+                        {
+                            has_max_level = true;
+                        }
+                    }
+                }
+            }
+        }
     }
-    public TraitTree[] Player_Trait;
+    public TraitTree Player_Trait;
     // Use this for initialization
     void Start () {
 		
